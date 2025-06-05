@@ -121,4 +121,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Issues
 
-If you find any bugs or have feature requests, please create an issue on [GitHub](https://github.com/yourusername/vite-plugin-tailwind-runtime-class/issues).
+If you find any bugs or have feature requests, please create an issue on [GitHub](https://github.com/ahmedGamalhamed/vite-plugin-tailwind-runtime-class/issues).
