@@ -1,5 +1,5 @@
 ## Features
-
+- ✅ No runtime performance hit, its just an extra step at build time.
 - 🔍 Automatically scans files for runtime class definitions
 - 🔄 Hot reload support during development
 - 📦 Generates JSON output for Tailwind CSS consumption
