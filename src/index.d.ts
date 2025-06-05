@@ -12,7 +12,7 @@ declare module 'virtual:vite-plugin-tailwind-runtime-class' {
    *
    * @returns The original object with an added `runtimeClass` property.
    */
-  export declare function generateRuntimeClass<
+  export function generateRuntimeClass<
     T extends Record<string, string> & {
       default?: string;
     },
