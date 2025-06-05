@@ -1,14 +1,3 @@
-## Installation
-
-```bash
-npm install vite-plugin-tailwind-runtime-class
-# or
-yarn add vite-plugin# vite-plugin-tailwind-runtime-class
-
-[![npm version](https://badge.fury.io/js/vite-plugin-tailwind-runtime-class.svg)](https://www.npmjs.com/package/vite-plugin-tailwind-runtime-class)
-
-A Vite plugin that generates runtime Tailwind CSS classes by scanning your files for dynamic class definitions.
-
 ## Features
 
 - 🔍 Automatically scans files for runtime class definitions
@@ -32,7 +21,6 @@ const classes = generateClasses({ ... });
 import { generateRuntimeClass as genClass } from '...';
 const classes = genClass({ ... });
 ```
-
 ## Installation
 
 ```bash
