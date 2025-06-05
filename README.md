@@ -1,4 +1,5 @@
 ## Features
+
 - ✅ No runtime performance hit, its just an extra step at build time.
 - 🔍 Automatically scans files for runtime class definitions
 - 🔄 Hot reload support during development
@@ -110,6 +111,61 @@ Generated classes:
 ```
 p-4 bg-white md:p-6 lg:p-8 lg:bg-gray-100
 ```
+
+## Example using class-variant-authority
+### Problem
+
+###### Notice how we have to repeat same classes in the responsive class but with break points this time
+
+```typescript
+const buttonVariants = cva("", {
+ variants: {
+  size: {
+   sm: "h-7 px-3 py-2 text-2xs rounded-lg",
+   md: "h-8 px-3 py-2 text-xs rounded-lg",
+   lg: "h-[2.375rem] px-4 py-2.5 text-sm rounded-lgPlus",
+   xl: "h-10 px-6 py-2 text-base rounded-lgPlus",
+
+   // Repeat sames classes but this time with break points
+   responsive: `h-7 px-3 py-2 text-2xs rounded-lg md:h-8 md:px-3 md:py-2 md:text-xs md:rounded-lg lg:h-[2.375rem] lg:px-4 lg:py-2.5 lg:text-sm lg:rounded-lgPlus xl:h-10 xl:px-6 xl:py-2 xl:text-base xl:rounded-lgPlus`,
+  },
+ },
+});
+
+export default function example() {
+ return <button className={buttonVariants()}>example</button>;
+}
+```
+
+### Solution
+###### No repeating, easier to maintain 
+
+```typescript
+import { generateRuntimeClass } from "virtual:vite-plugin-tailwind-runtime-class";
+
+const classes = generateRuntimeClass({
+ sm: "h-7 px-3 py-2 text-2xs rounded-lg",
+ md: "h-8 px-3 py-2 text-xs rounded-lg",
+ lg: "h-[2.375rem] px-4 py-2.5 text-sm rounded-lgPlus",
+ xl: "h-10 px-6 py-2 text-base rounded-lgPlus",
+});
+
+const buttonVariants = cva("", {
+ variants: {
+  size: {
+   ...classes,
+   responsive: classes.runtimeClass, // no repeating
+  },
+ },
+});
+export default function example() {
+ return <button className={buttonVariants()}>example</button>;
+}
+```
+
+## Planned updates
+- Add your own resolver so you define how the runtime classes should be calculated.
+
 
 ## License
 
