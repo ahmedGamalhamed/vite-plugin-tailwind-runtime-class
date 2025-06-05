@@ -45,7 +45,7 @@ import tailwindRuntimeClassGenerator from "vite-plugin-tailwind-runtime-class";
 export default defineConfig({
  plugins: [
   tailwindRuntimeClassGenerator({
-   include: ["src/**/*.{js,ts,jsx,tsx,vue}"],
+   include: ["src/**/*"],
    exclude: ["node_modules"],
    outPutPath: "./tailwind-runtime-classes.json",
   }),
