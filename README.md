@@ -21,6 +21,7 @@ const classes = generateClasses({ ... });
 import { generateRuntimeClass as genClass } from '...';
 const classes = genClass({ ... });
 ```
+
 ## Installation
 
 ```bash
@@ -38,18 +39,25 @@ pnpm add vite-plugin-tailwind-runtime-class
 Add the plugin to your `vite.config.ts`:
 
 ```typescript
-import { defineConfig } from 'vite';
-import tailwindRuntimeClassGenerator from 'vite-plugin-tailwind-runtime-class';
+import { defineConfig } from "vite";
+import tailwindRuntimeClassGenerator from "vite-plugin-tailwind-runtime-class";
 
 export default defineConfig({
-  plugins: [
-    tailwindRuntimeClassGenerator({
-      include: ['src/**/*.{js,ts,jsx,tsx,vue}'],
-      exclude: ['node_modules'],
-      outPutPath: './tailwind-runtime-classes.json'
-    })
-  ]
+ plugins: [
+  tailwindRuntimeClassGenerator({
+   include: ["src/**/*.{js,ts,jsx,tsx,vue}"],
+   exclude: ["node_modules"],
+   outPutPath: "./tailwind-runtime-classes.json",
+  }),
+ ],
 });
+```
+
+if you are using typescript, add type definitions to your `typescript.json` or `typescript.app.json`
+
+```json
+include: ["src", ..., "node_modules/vite-plugin-tailwind-runtime-class/dist/virtual-module.d.d.ts"]
+
 ```
 
 ### In Your Code
@@ -57,39 +65,25 @@ export default defineConfig({
 Use the virtual module to generate runtime classes:
 
 ```typescript
-import { generateRuntimeClass } from 'virtual:vite-plugin-tailwind-runtime-class';
+import { generateRuntimeClass } from "virtual:vite-plugin-tailwind-runtime-class";
 
 const runtimeClasses = generateRuntimeClass({
-  default: 'bg-blue-500 text-white',
-  sm: 'bg-red-500',
-  lg: 'bg-green-500 text-black'
+ default: "bg-blue-500 text-white",
+ sm: "bg-red-500",
+ lg: "bg-green-500 text-black",
 });
 
 console.log(runtimeClasses.runtimeClass);
 // Output: "bg-blue-500 text-white sm:bg-red-500 lg:bg-green-500 lg:text-black"
 ```
 
-### Tailwind Configuration
-
-Update your `tailwind.config.js` to include the generated classes:
-
-```javascript
-module.exports = {
-  content: [
-    './src/**/*.{js,ts,jsx,tsx,vue}',
-    './tailwind-runtime-classes.json'
-  ],
-  // ... rest of your config
-};
-```
-
 ## Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `include` | `string[]` | `[]` | File patterns to include (default: all files) |
-| `exclude` | `string[]` | `['node_modules']` | File patterns to exclude |
-| `outPutPath` | `string` | `'./vite-plugin-tailwind-runtime-class.json'` | Output file location for Tailwind to pickup |
+| Option       | Type       | Default                                       | Description                                   |
+| ------------ | ---------- | --------------------------------------------- | --------------------------------------------- |
+| `include`    | `string[]` | `[]`                                          | File patterns to include (default: all files) |
+| `exclude`    | `string[]` | `['node_modules']`                            | File patterns to exclude                      |
+| `outPutPath` | `string`   | `'./vite-plugin-tailwind-runtime-class.json'` | Output file location for Tailwind to pickup   |
 
 ## How It Works
 
@@ -102,15 +96,17 @@ module.exports = {
 ## Example
 
 Input:
+
 ```typescript
 const classes = generateRuntimeClass({
-  default: 'p-4 bg-white',
-  md: 'p-6',
-  lg: 'p-8 bg-gray-100'
+ default: "p-4 bg-white",
+ md: "p-6",
+ lg: "p-8 bg-gray-100",
 });
 ```
 
 Generated classes:
+
 ```
 p-4 bg-white md:p-6 lg:p-8 lg:bg-gray-100
 ```
