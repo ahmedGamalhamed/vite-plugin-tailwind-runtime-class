@@ -62,12 +62,7 @@ export default function tailwindRuntimeClassGenerator({
       const match = content.match(regex);
       if (!match || !match[1]) return result;
 
-      const jsonStr = match[1]
-        .replace(/(\w+):/g, '"$1":')
-        .replace(/'/g, '"')
-        .replace(/,\s*}/, '}');
-
-      const obj = JSON.parse(jsonStr) as Record<string, string>;
+      const obj = Function(`"use strict"; return (${match[1]})`)();
       const runtimeClass = generateRuntimeClass(obj);
       return runtimeClass;
     } catch (e) {
