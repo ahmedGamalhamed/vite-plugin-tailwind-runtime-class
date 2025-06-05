@@ -1,4 +1,11 @@
-# vite-plugin-tailwind-runtime-class
+## Installation
+
+```bash
+npm install vite-plugin-tailwind-runtime-class
+# or
+yarn add vite-plugin# vite-plugin-tailwind-runtime-class
+
+[![npm version](https://badge.fury.io/js/vite-plugin-tailwind-runtime-class.svg)](https://www.npmjs.com/package/vite-plugin-tailwind-runtime-class)
 
 A Vite plugin that generates runtime Tailwind CSS classes by scanning your files for dynamic class definitions.
 
@@ -9,6 +16,22 @@ A Vite plugin that generates runtime Tailwind CSS classes by scanning your files
 - 📦 Generates JSON output for Tailwind CSS consumption
 - ⚡ Fast file watching with hash-based change detection
 - 🎯 Configurable include/exclude patterns
+
+## ⚠️ CRITICAL REQUIREMENT
+
+**The function name MUST be exactly `generateRuntimeClass` and CANNOT be changed, renamed, or aliased. The plugin specifically scans for this exact function name in your code. Using any other name will cause the plugin to fail silently.**
+
+```typescript
+// ✅ CORRECT - Plugin will detect this
+const classes = generateRuntimeClass({ ... });
+
+// ❌ WRONG - Plugin will NOT detect these
+const classes = myCustomName({ ... });
+const generateClasses = generateRuntimeClass;
+const classes = generateClasses({ ... });
+import { generateRuntimeClass as genClass } from '...';
+const classes = genClass({ ... });
+```
 
 ## Installation
 
