@@ -80,15 +80,15 @@ export default function tailwindRuntimeClassGenerator({
     try {
       const allFiles = glob.sync(include);
       let processedCount = 0;
-
       for (const filePath of allFiles) {
         const fileInfo = getFileInfo(filePath);
         if (fileInfo && fileInfo.hash) {
           fileHashes.set(filePath, fileInfo.hash);
           const runtimeResult = extractRuntimeClassFromFile(filePath);
-
+          
           if (runtimeResult.runtimeClass.trim()) {
-            classMap[filePath] = runtimeResult.runtimeClass;
+            const relativePath = toRelativePath(filePath)
+            classMap[relativePath] = runtimeResult.runtimeClass;
             processedCount++;
           }
         }
@@ -157,9 +157,9 @@ export default function tailwindRuntimeClassGenerator({
 
           fileHashes.set(relativePath, fileInfo.hash);
           const { runtimeClass } = extractRuntimeClassFromFile(filePath);
-          const oldValue = classMap[filePath];
+          const oldValue = classMap[relativePath];
           if (oldValue !== runtimeClass) {
-            classMap[filePath] = runtimeClass;
+            classMap[relativePath] = runtimeClass;
             writeClassObjToDesk(classMap);
           }
         }
