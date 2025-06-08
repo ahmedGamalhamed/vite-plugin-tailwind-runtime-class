@@ -1,6 +1,6 @@
 {
  "name": "vite-plugin-tailwind-runtime-class",
- "version": "1.0.9",
+ "version": "1.0.10",
  "description": "A Vite plugin that generates runtime Tailwind CSS classes by scanning files for class definitions",
  "main": "dist/index.js",
  "module": "dist/index.mjs",
