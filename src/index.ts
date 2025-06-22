@@ -66,7 +66,7 @@ export default function tailwindRuntimeClassGenerator({
       const runtimeClass = generateRuntimeClass(obj);
       return runtimeClass;
     } catch (e) {
-      console.error(e);
+      // console.error(e);
       return result;
     }
   }
